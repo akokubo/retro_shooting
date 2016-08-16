@@ -19,8 +19,11 @@ class Alien extends Sprite {
     x += direction * speed;
     // 画面の端に着いたら
     if (atEnds()) {
-      // ターンする
-      turn();
+      // 全エイリアンにターンを指示する
+      for (int i = 0; i < aliens.size(); i++) {
+        Alien alien = aliens.get(i);
+        alien.turn();
+      }
     }
   }
 
