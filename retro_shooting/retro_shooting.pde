@@ -1,6 +1,7 @@
 // オブジェクト
 Stage stage;
 Cannon cannon;
+Laser laser;
 
 void setup() {
   // ディスプレイ・ウィンドウのサイズを640x360に
@@ -22,7 +23,23 @@ void draw() {
   // キャノンの移動
   cannon.move();
 
+  // レーザーの発射
+  if (laser == null) {
+    // レーザーがないときにマウスをクリックしたら
+    if (mousePressed) {
+      // レーザーをキャノンの位置に生成
+      laser = new Laser(loadImage("laser.png"), cannon.x, cannon.y - 8);
+    }
+  } else {
+    // レーザーがあるときは、移動させる
+    laser.move();
+  }
+
   // 表示
   stage.display();
   cannon.display();
+  if (laser != null) {
+    // レーザーが存在するとき、表示させる
+    laser.display();
+  }
 }
