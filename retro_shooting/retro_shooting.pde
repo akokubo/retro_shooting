@@ -2,7 +2,7 @@
 Stage stage;
 Cannon cannon;
 Laser laser;
-Alien alien;
+ArrayList<Alien> aliens;
 
 void setup() {
   // ディスプレイ・ウィンドウのサイズを640x360に
@@ -15,7 +15,18 @@ void setup() {
   stage = new Stage(loadImage("stage.png"));
   cannon = new Cannon(loadImage("cannon.png"), 
     stage.image.width / 2, stage.image.height - 38);
-  alien = new Alien(loadImage("alien.png"), 20, 20);
+
+  // エイリアン群の生成
+  aliens = new ArrayList<Alien>();
+  // 一つ一つのエイリアンを生成
+  for (int y = 20; y <= 120; y += 20) {
+    for (int x = 20; x <= 340; x+= 32) {
+      // エイリアンを生成し
+      Alien alien = new Alien(loadImage("alien.png"), x, y);
+      // エイリアン群に追加
+      aliens.add(alien);
+    }
+  }
 }
 
 void draw() {
@@ -42,8 +53,13 @@ void draw() {
     }
   }
 
-  // エイリアンの移動
-  alien.move();
+  // エイリアン群の移動
+  for (int i = 0; i < aliens.size(); i++) {
+    // エイリアンを1つ取り出し
+    Alien alien = aliens.get(i);
+    // エイリアンを移動させる
+    alien.move();
+  }
 
   // 表示
   stage.display();
@@ -52,5 +68,10 @@ void draw() {
     // レーザーが存在するとき、表示させる
     laser.display();
   }
-  alien.display();
+  for (int i = 0; i < aliens.size(); i++) {
+    // エイリアンを一つ取り出し
+    Alien alien = aliens.get(i);
+    // エイリアンを表示する
+    alien.display();
+  }
 }
