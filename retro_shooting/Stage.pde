@@ -32,10 +32,28 @@ class Stage extends Sprite {
 
     // ライフの表示
     text("LIFE: " + cannon.life, this.image.width + 20, 40);
+
+    // ゲームオーバーの表示
+    if (isGameOver()) {
+      fill(255, 0, 0);
+      text("Game Over", this.image.width / 2 - 50, this.image.height / 2 - 10);
+    }
   }
 
   // スコアアップ
   void scoreUp(int value) {
     score += value;
+  }
+
+  // ゲームオーバーか
+  boolean isGameOver() {
+    boolean result = false;
+
+    // ライフがゼロ
+    if (cannon.life <= 0) {
+      result = true;
+    }
+
+    return result;
   }
 }

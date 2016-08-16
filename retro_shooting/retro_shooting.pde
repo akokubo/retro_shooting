@@ -33,6 +33,8 @@ void draw() {
   // 残像を消す
   background(204);
 
+  // ゲームオーバーになっていなければ
+  if (!stage.isGameOver()) {
   // キャノンの移動
   cannon.move();
 
@@ -88,6 +90,7 @@ void draw() {
       // エイリアンを消す
       aliens.remove(alien);
     }
+  }
   }
 
   // 表示
