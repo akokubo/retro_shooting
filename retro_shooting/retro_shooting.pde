@@ -3,6 +3,7 @@ Stage stage;
 Cannon cannon;
 Laser laser;
 ArrayList<Alien> aliens;
+ArrayList<Bomb> bombs;
 
 void setup() {
   // ディスプレイ・ウィンドウのサイズを640x360に
@@ -27,6 +28,9 @@ void setup() {
       aliens.add(alien);
     }
   }
+
+  // 爆弾群の生成
+  bombs = new ArrayList<Bomb>();
 }
 
 void draw() {
@@ -62,6 +66,32 @@ void draw() {
       Alien alien = aliens.get(i);
       // エイリアンを移動させる
       alien.move();
+    }
+
+    // 爆弾の投下
+    for (int i = 0; i < aliens.size(); i++) {
+      // エイリアンを1つ取り出し
+      Alien alien = aliens.get(i);
+      // ある確率(60秒に1回)で
+      if (random(60 * frameRate) < 1) {
+        // 爆弾を生成
+        Bomb bomb = new Bomb(loadImage("bomb.png"), alien.x, alien.y);
+        // 爆弾群に追加
+        bombs.add(bomb);
+      }
+    }
+
+    // 爆弾群の移動
+    for (int i = 0; i < bombs.size(); i++) {
+      // 爆弾を1つ取り出し
+      Bomb bomb = bombs.get(i);
+      // 爆弾を移動させる
+      bomb.move();
+      // 爆弾が画面外に出たら
+      if (bomb.isOver()) {
+        // 爆弾を消す
+        bombs.remove(bomb);
+      }
     }
 
     // レーザーとエイリアンの当たり判定
@@ -106,5 +136,11 @@ void draw() {
     Alien alien = aliens.get(i);
     // エイリアンを表示する
     alien.display();
+  }
+  for (int i = 0; i < bombs.size(); i++) {
+    // 爆弾をーつ取り出し
+    Bomb bomb = bombs.get(i);
+    // 爆弾を表示する
+    bomb.display();
   }
 }
