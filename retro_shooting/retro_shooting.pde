@@ -33,6 +33,11 @@ void draw() {
   } else {
     // レーザーがあるときは、移動させる
     laser.move();
+    // レーザーが画面外に出たら
+    if (laser.isOver()) {
+      // レーザーを消す
+      laser = null;
+    }
   }
 
   // 表示

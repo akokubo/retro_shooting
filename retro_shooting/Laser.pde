@@ -18,4 +18,15 @@ class Laser extends Sprite {
   void move() {
     y -= speed;
   }
+
+  // 画面外に出たか
+  boolean isOver() {
+    boolean result = false;
+
+    if (y < 0) {
+      result = true;
+    }
+
+    return result;
+  }
 }
