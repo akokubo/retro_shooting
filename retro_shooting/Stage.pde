@@ -38,6 +38,12 @@ class Stage extends Sprite {
       fill(255, 0, 0);
       text("Game Over", this.image.width / 2 - 50, this.image.height / 2 - 10);
     }
+
+    // 勝利の表示
+    if (isWin()) {
+      fill(255, 0, 0);
+      text("You Win", this.image.width / 2 - 50, this.image.height / 2 - 10);
+    }
   }
 
   // スコアアップ
@@ -51,6 +57,18 @@ class Stage extends Sprite {
 
     // ライフがゼロ
     if (cannon.life <= 0) {
+      result = true;
+    }
+
+    return result;
+  }
+
+  // ゲームに勝ったか
+  boolean isWin() {
+    boolean result = false;
+
+    // エイリアンをすべて倒した
+    if (aliens.size() == 0) {
       result = true;
     }
 

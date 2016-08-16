@@ -33,8 +33,8 @@ void draw() {
   // 残像を消す
   background(204);
 
-  // ゲームオーバーになっていなければ
-  if (!stage.isGameOver()) {
+  // ゲームが終了していなければ
+  if (!stage.isGameOver() && !stage.isWin()) {
     // キャノンの移動
     cannon.move();
 
