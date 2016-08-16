@@ -2,6 +2,7 @@
 Stage stage;
 Cannon cannon;
 Laser laser;
+Alien alien;
 
 void setup() {
   // ディスプレイ・ウィンドウのサイズを640x360に
@@ -14,6 +15,7 @@ void setup() {
   stage = new Stage(loadImage("stage.png"));
   cannon = new Cannon(loadImage("cannon.png"), 
     stage.image.width / 2, stage.image.height - 38);
+  alien = new Alien(loadImage("alien.png"), 20, 20);
 }
 
 void draw() {
@@ -40,6 +42,9 @@ void draw() {
     }
   }
 
+  // エイリアンの移動
+  alien.move();
+
   // 表示
   stage.display();
   cannon.display();
@@ -47,4 +52,5 @@ void draw() {
     // レーザーが存在するとき、表示させる
     laser.display();
   }
+  alien.display();
 }
