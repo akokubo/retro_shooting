@@ -30,8 +30,8 @@ class Stage extends Sprite {
     // スコアの表示
     text("SCORE: " + score, this.image.width + 20, 20);
 
-    // ライフの表示(仮)
-    text("LIFE: 3", this.image.width + 20, 40);
+    // ライフの表示
+    text("LIFE: " + cannon.life, this.image.width + 20, 40);
   }
 
   // スコアアップ

@@ -1,6 +1,7 @@
 // キャノン・クラス
 class Cannon extends Sprite {
   float speed; // 速度
+  int life; // ライフ
 
   // コンストラクタ
   Cannon(PImage image, float x, float y) {
@@ -8,6 +9,9 @@ class Cannon extends Sprite {
 
     // 速度の指定
     speed = 2;
+
+    // ライフの初期値
+    life = 3;
   }
 
   // 移動(オーバーライド)
@@ -18,5 +22,10 @@ class Cannon extends Sprite {
     } else if (x > mouseX && x > this.image.width /2) {
       x -= speed;
     }
+  }
+
+  // キャノンの破壊
+  void destroy() {
+    life--;
   }
 }

@@ -78,6 +78,18 @@ void draw() {
     }
   }
 
+  // キャノンとエイリアンの当たり判定
+  for (int i = 0; i < aliens.size(); i++) {
+    Alien alien = aliens.get(i);
+    // キャノンがエイリアンに当たったら
+    if (cannon.isContactedWith(alien)) {
+      // キャノンを破壊して
+      cannon.destroy();
+      // エイリアンを消す
+      aliens.remove(alien);
+    }
+  }
+
   // 表示
   stage.display();
   cannon.display();
