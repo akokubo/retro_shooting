@@ -124,6 +124,18 @@ void draw() {
     }
   }
 
+  // キャノンと爆弾の当たり判定
+  for (int i = 0; i < bombs.size(); i++) {
+    Bomb bomb = bombs.get(i);
+    // キャノンが爆弾に当たったら
+    if (cannon.isContactedWith(bomb)) {
+      // キャノンを破壊して
+      cannon.destroy();
+      // 爆弾を消す
+      bombs.remove(bomb);
+    }
+  }
+
   // 表示
   stage.display();
   cannon.display();
