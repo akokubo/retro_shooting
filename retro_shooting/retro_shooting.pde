@@ -61,6 +61,20 @@ void draw() {
     alien.move();
   }
 
+  // レーザーとエイリアンの当たり判定
+  for (int i = 0; i < aliens.size(); i++) {
+    // エイリアンを一つ取り出し
+    Alien alien = aliens.get(i);
+    // レーザーが存在して、そのレーザーがエイリアンに当たったら
+    if (laser != null && laser.isContactedWith(alien)) {
+      // レーザーを消して
+      laser = null;
+
+      // エイリアンを消す
+      aliens.remove(alien);
+    }
+  }
+
   // 表示
   stage.display();
   cannon.display();
