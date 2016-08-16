@@ -13,9 +13,9 @@ class Cannon extends Sprite {
   // 移動(オーバーライド)
   void move() {
     // マウスの方向にspeed分移動する
-    if (x < mouseX) {
+    if (x < mouseX && x < stage.image.width - this.image.width / 2) {      
       x += speed;
-    } else if (x > mouseX) {
+    } else if (x > mouseX && x > this.image.width /2) {
       x -= speed;
     }
   }
