@@ -1,6 +1,7 @@
 // ステージ・クラス
 class Stage extends Sprite {
   PFont font; // フォント
+  int score; // スコア
 
   // コンストラクタ
   Stage(PImage image) {
@@ -12,6 +13,9 @@ class Stage extends Sprite {
 
     // フォントの生成
     font = createFont("MS Gothic", 20);
+
+    // スコアの初期化
+    score = 0;
   }
 
   // 表示(オーバーライド)
@@ -23,10 +27,15 @@ class Stage extends Sprite {
     textFont(font);
     fill(0);
 
-    // スコアの表示(仮)
-    text("SCORE: 14000", this.image.width + 20, 20);
+    // スコアの表示
+    text("SCORE: " + score, this.image.width + 20, 20);
 
     // ライフの表示(仮)
     text("LIFE: 3", this.image.width + 20, 40);
+  }
+
+  // スコアアップ
+  void scoreUp(int value) {
+    score += value;
   }
 }

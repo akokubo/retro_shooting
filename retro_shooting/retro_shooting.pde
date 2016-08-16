@@ -72,6 +72,9 @@ void draw() {
 
       // エイリアンを消す
       aliens.remove(alien);
+
+      // スコアをアップする
+      stage.scoreUp(100);
     }
   }
 
