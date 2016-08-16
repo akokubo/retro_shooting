@@ -35,62 +35,63 @@ void draw() {
 
   // ゲームオーバーになっていなければ
   if (!stage.isGameOver()) {
-  // キャノンの移動
-  cannon.move();
+    // キャノンの移動
+    cannon.move();
 
-  // レーザーの発射
-  if (laser == null) {
-    // レーザーがないときにマウスをクリックしたら
-    if (mousePressed) {
-      // レーザーをキャノンの位置に生成
-      laser = new Laser(loadImage("laser.png"), cannon.x, cannon.y - 8);
+    // レーザーの発射
+    if (laser == null) {
+      // レーザーがないときにマウスをクリックしたら
+      if (mousePressed) {
+        // レーザーをキャノンの位置に生成
+        laser = new Laser(loadImage("laser.png"), cannon.x, cannon.y - 8);
+      }
+    } else {
+      // レーザーがあるときは、移動させる
+      laser.move();
+
+      // レーザーが画面外に出たら
+      if (laser.isOver()) {
+        // レーザーを消す
+        laser = null;
+      }
     }
-  } else {
-    // レーザーがあるときは、移動させる
-    laser.move();
-    // レーザーが画面外に出たら
-    if (laser.isOver()) {
-      // レーザーを消す
-      laser = null;
+
+    // エイリアン群の移動
+    for (int i = 0; i < aliens.size(); i++) {
+      // エイリアンを1つ取り出し
+      Alien alien = aliens.get(i);
+      // エイリアンを移動させる
+      alien.move();
     }
-  }
 
-  // エイリアン群の移動
-  for (int i = 0; i < aliens.size(); i++) {
-    // エイリアンを1つ取り出し
-    Alien alien = aliens.get(i);
-    // エイリアンを移動させる
-    alien.move();
-  }
+    // レーザーとエイリアンの当たり判定
+    for (int i = 0; i < aliens.size(); i++) {
+      // エイリアンを一つ取り出し
+      Alien alien = aliens.get(i);
+      // レーザーが存在して、そのレーザーがエイリアンに当たったら
+      if (laser != null && laser.isContactedWith(alien)) {
+        // レーザーを消して
+        laser = null;
 
-  // レーザーとエイリアンの当たり判定
-  for (int i = 0; i < aliens.size(); i++) {
-    // エイリアンを一つ取り出し
-    Alien alien = aliens.get(i);
-    // レーザーが存在して、そのレーザーがエイリアンに当たったら
-    if (laser != null && laser.isContactedWith(alien)) {
-      // レーザーを消して
-      laser = null;
+        // エイリアンを消す
+        aliens.remove(alien);
 
-      // エイリアンを消す
-      aliens.remove(alien);
-
-      // スコアをアップする
-      stage.scoreUp(100);
+        // スコアをアップする
+        stage.scoreUp(100);
+      }
     }
-  }
 
-  // キャノンとエイリアンの当たり判定
-  for (int i = 0; i < aliens.size(); i++) {
-    Alien alien = aliens.get(i);
-    // キャノンがエイリアンに当たったら
-    if (cannon.isContactedWith(alien)) {
-      // キャノンを破壊して
-      cannon.destroy();
-      // エイリアンを消す
-      aliens.remove(alien);
+    // キャノンとエイリアンの当たり判定
+    for (int i = 0; i < aliens.size(); i++) {
+      Alien alien = aliens.get(i);
+      // キャノンがエイリアンに当たったら
+      if (cannon.isContactedWith(alien)) {
+        // キャノンを破壊して
+        cannon.destroy();
+        // エイリアンを消す
+        aliens.remove(alien);
+      }
     }
-  }
   }
 
   // 表示
